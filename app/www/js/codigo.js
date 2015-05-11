@@ -1,5 +1,6 @@
 $(function(){
 	
+	cabecera();
 	recuperarProductos();
 	mostrarProductos();
 	
@@ -25,6 +26,18 @@ $(function(){
 		}
 		
 		$("section").html(html);
+		
+	}
+	
+	function cabecera(){
+		
+		var html = "";
+		
+		html += "<header>";
+		html += "<h1>TPV</h1>";
+		html += "</header>";
+		
+		$("body").prepend(html);
 		
 	}
 	

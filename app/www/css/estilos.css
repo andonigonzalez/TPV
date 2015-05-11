@@ -1,0 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 16px;
+}
+body{
+	margin-top: 4%;
+}
+
+/*CABECERA*/
+
+header{
+	height: 48px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #212121;
+	color: #fafafa;
+	padding: 1%;
+}
+
+
+/*CUERPO*/
+
+section article{
+	width: 95%;
+	margin: auto;
+}
+section article img{
+	width: 100%;
+}
