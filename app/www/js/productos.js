@@ -1,32 +1,21 @@
-function Productos(purl){
-	this.url = purl;
-};
-
-Productos.prototype.recuperarProductos = function(){
+function recuperarProductos(){
 	
 	var tag = "recuperarProductos";
 	
 	$.ajax({
 		type: "POST",
 		datatype: "json",
-		url : this.url,
+		url : "http://andonigonzalez.ikasle.aeg.es/php/controlador.php",
 		data: {'tag':tag},
-		success: function(datos){
-			if(datos != false){
+		success: function(data){
+			if(data != false){
+				var datos = JSON.parse(data);
 				localStorage.setItem("productos", JSON.stringify(datos));
 			}
 		},
 		error: function(){
-			alert("Error al recuperar los productos");
+			alert("Error de ajax");
 		}
 	});
-	
-};
-
-Productos.prototype.actualizarProductos = function(){
-	
-	localStorage.removeItem("productos");
-	
-	this.recuperarProductos();
 	
 };
