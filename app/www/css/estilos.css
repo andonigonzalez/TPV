@@ -5,20 +5,57 @@
 	font-size: 16px;
 }
 body{
-	margin-top: 4%;
+	margin-top: 20%;
 }
+.cierre{
+	clear: both;
+}
+.btn{
+	border: none;
+	color: #fafafa;
+	background-color: #212121;
+	padding: 2%;
+	border-radius: 5px;
+}
+
 
 /*CABECERA*/
 
 header{
-	height: 48px;
 	width: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
 	background-color: #212121;
 	color: #fafafa;
-	padding: 1%;
+	z-index: 5;
+}
+header h1{
+	display: inline-block;
+	font-size: 2em;
+}
+#burger{
+	width: 18%;
+	float: right;
+}
+
+
+/*MENU ABAJO*/
+
+nav{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #212121;
+	color: #fafafa;
+	width: 100%;
+}
+nav ul{
+	width: 100%;
+}
+nav ul li{
+	display: inline-block;
+	padding: 2%;
 }
 
 
@@ -30,4 +67,12 @@ section article{
 }
 section article img{
 	width: 100%;
+	margin: 1.5% 0;
+}
+section article p{
+	display: inline-block;
+}
+section article .btn{
+	float: right;
+	display: inline-block
 }
