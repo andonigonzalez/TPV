@@ -1,2 +1,2 @@
-/home/agonzalez/Documentos/apps/tpv/platforms/android/CordovaLib/ant-build/AndroidManifest.xml : \
-/home/agonzalez/Documentos/apps/tpv/platforms/android/CordovaLib/AndroidManifest.xml \
+/home/agonzalez/Documentos/TPV/app/platforms/android/CordovaLib/ant-build/AndroidManifest.xml : \
+/home/agonzalez/Documentos/TPV/app/platforms/android/CordovaLib/AndroidManifest.xml \
