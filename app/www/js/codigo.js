@@ -8,7 +8,7 @@ function cabecera(){
 		html += "<div class='cierre'></div>";
 	html += "</header>";
 	
-	$("body").append(html);
+	$("body").prepend(html);
 	
 }
 
@@ -66,12 +66,12 @@ function mostrarProductos(){
 			html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
 			html += "<img src='http://andonigonzalez.ikasle.aeg.es/milart/img/"+ img +"' alt='"+ nombre +"'>";
 			html += "<p>Precio: "+ (2*i+3) +" €</p>";
-			html += "<button class='btn'>Pedir</button>";
+			html += "<button class='btn botonCompra' onclick='addItem()'>Pedir</button>";
 		html += "</article>";
 		
 	}
 	
-	$("section").html(html);
+	$("#productos").html(html);
 	
 }
 
@@ -84,5 +84,12 @@ $(function(){
 	FastClick.attach(document.body);
 	
 	recuperarProductos();
+	
+	if(sessionStorage.getItem("carrito") == null){
+		crearCarrito();
+	}
+	else{
+		pintarCarrito();
+	}
 
 });
