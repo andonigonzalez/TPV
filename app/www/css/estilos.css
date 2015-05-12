@@ -5,7 +5,8 @@
 	font-size: 16px;
 }
 body{
-	margin-top: 20%;
+	margin-top: 15%;
+	margin-bottom: 20%;
 }
 .cierre{
 	clear: both;
@@ -16,6 +17,11 @@ body{
 	background-color: #212121;
 	padding: 2%;
 	border-radius: 5px;
+	text-decoration: none;
+}
+section{
+	width: 96%;
+	margin: auto;
 }
 
 
@@ -28,15 +34,36 @@ header{
 	left: 0;
 	background-color: #212121;
 	color: #fafafa;
-	z-index: 5;
+	padding-left: 3%;
 }
 header h1{
 	display: inline-block;
-	font-size: 2em;
+	font-size: 2.4em;
 }
 #burger{
-	width: 18%;
+	width: 20%;
 	float: right;
+}
+
+
+/*MENU ARRIBA*/
+
+#menuArriba{
+	display: none;
+	position: fixed;
+	top: 7.5%;
+	left: 0;
+	width: 100%;
+	background-color: #212121;
+	color: #fafafa;
+}
+#menuArriba ul{
+	width: 100%;
+}
+#menuArriba ul li{
+	border-top: 1px solid #eee;
+	padding: 3% 0;
+	padding-left: 10%;
 }
 
 
@@ -55,24 +82,33 @@ nav ul{
 }
 nav ul li{
 	display: inline-block;
-	padding: 2%;
+	padding: 4% 3.3%;
 }
 
 
 /*CUERPO*/
 
-section article{
-	width: 95%;
+/*INICIO*/
+
+#comenzarPedido{
+	display: block;
+	width: 60%; 
 	margin: auto;
+	text-align: center;
+	padding: 5% 0;
+	margin-top: 90%;
 }
-section article img{
+
+/*PRODUCTOS*/
+
+#productos article img{
 	width: 100%;
 	margin: 1.5% 0;
 }
-section article p{
+#productos article p{
 	display: inline-block;
 }
-section article .btn{
+#productos article .btn{
 	float: right;
 	display: inline-block
 }

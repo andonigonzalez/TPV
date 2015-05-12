@@ -45,13 +45,16 @@ class Productos{
 		$consulta = $this->sql->query("select * from productos");
 
 		if($consulta->num_rows > 0){
-			$datos["productos"] = array();
-			while($fila = $consulta->fetch_array()){
-				$aux = array();
-				$aux["id"] = $fila["id"];
-				$aux["nombre"] = $fila["nombre"];
-				$aux["descripcion"] = $fila["descripcion"];
-				array_push($datos["productos"], $aux);
+			$datos = array();
+			while($fila = $consulta->fetch_object()){
+				$aux = array(
+					"idProducto"  => $fila->id,
+					"nombre" => $fila->nombre,
+					"descripcion" => $fila->descripcion,
+					"img" => $fila->img,
+				);
+				
+				array_push($datos, $aux);
 			}
 		}
 		else{

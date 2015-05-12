@@ -1,24 +1,26 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+header("Access-Control-Allow-Origin: *");
 
-require_once("clases.php");
+include("clases.php");
 
 if(isset($_POST["tag"]) || $_POST["tag"] != ""){
-
+	
 	$tag = $_POST["tag"];
-
+	
 	switch($tag){
-
-		case "recuperarProdutos":
-
+		
+		case "recuperarProductos":
 			$obj = new Productos();
-			$datos = $obj->recuperarProdutos();
+			$datos = $obj->getProductos();
 
+			echo json_encode($datos);
+			
 			break;
-
+		
 	}
-
-	echo json_encode($datos);
-
+	
 }
 
 ?>
