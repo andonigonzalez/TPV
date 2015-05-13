@@ -36,7 +36,10 @@ function pintarCarrito(){
 			html += "<li>";
 				html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
 				html += "<p>Precio: "+ precio*cantidad +" €</p>";
-				html += "<p>Cantidad: "+ cantidad +"</p>";
+				html += "<p>x"+ cantidad +"</p>";
+				html += "<button class='btn' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
+				html += "<button class='btn' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
+				html += "<button class='btn' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
 			html += "</li>";
 			
 		}
@@ -82,6 +85,35 @@ function vaciarCarrito(){
 	var carrito = [];
 	sessionStorage.setItem("carrito", JSON.stringify(carrito));
 	pintarCarrito();
+}
+
+function modificarCarrito(paccion, pposicion){
+	
+	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
+	var cantidad = carrito[pposicion].cantidad;
+	
+	switch(paccion){
+		
+		case 0:
+			carrito[pposicion].cantidad = cantidad - 1;
+			if(carrito[pposicion].cantidad == 0){
+				carrito.splice(pposicion, 1);
+			}
+			break;
+		
+		case 1:
+			carrito[pposicion].cantidad = cantidad + 1;
+			break;
+			
+		case 2:
+			carrito.splice(pposicion, 1);
+			break;
+		
+	}
+	
+	sessionStorage.setItem("carrito", JSON.stringify(carrito));
+	pintarCarrito();
+	
 }
 
 function finalizarCompra(){

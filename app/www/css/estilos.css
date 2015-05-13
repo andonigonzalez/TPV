@@ -104,7 +104,7 @@ nav ul li{
 	background-color: #fafafa;
 	color: #212121;
 }
-#carrito .btn:nth-child(1), #carrito .btn:nth-child(2){
+#carrito > .btn{
 	width: 48%;
 	margin: 0 .5%;
 }
@@ -121,6 +121,9 @@ nav ul li{
 #carrito ul li p{
 	display: inline-block;
 	margin-right: 3%;
+}
+#carrito ul li .btn{
+	margin: 0 3%;
 }
 #carrito #total{
 	font-size: 1.3em;
