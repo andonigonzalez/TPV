@@ -89,7 +89,9 @@ nav ul li{
 /*CARRITO*/
 
 #carrito{
+	display: none;
 	width: 100%;
+	height: 86%;
 	background-color: #212121;
 	position: fixed;
 	top: 7.5%;
@@ -97,6 +99,32 @@ nav ul li{
 	z-index: 100;
 	color: #fafafa;
 	padding: 4%;
+}
+#carrito .btn{
+	background-color: #fafafa;
+	color: #212121;
+}
+#carrito .btn:nth-child(1), #carrito .btn:nth-child(2){
+	width: 48%;
+	margin: 0 .5%;
+}
+#carrito ul{
+	margin: 5% 0;
+	list-style-type: none;
+	max-height: 60%;
+	overflow-y: auto;
+}
+#carrito ul li{
+	border-bottom: 1px solid #eee;
+	padding: 3% 0;
+}
+#carrito ul li p{
+	display: inline-block;
+	margin-right: 3%;
+}
+#carrito #total{
+	font-size: 1.3em;
+	text-align: center;
 }
 
 

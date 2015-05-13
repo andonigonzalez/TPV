@@ -12,27 +12,39 @@ function pintarCarrito(){
 	
 	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
 	
+	var total = 0;
 	var html = "";
 	
+	html += "<button id='vaciarCarrito' class='btn' onclick='vaciarCarrito()'>VaciarCarrito</button>";
+	html += "<button class='btn' onclick='esconderCarrito()'>Seguir Comprando</button>";
+	html += "<ul>";
+	
 	if(carrito.length == 0){
-		html += "<p>EL CARRITO ESTA VACIO</p>";
+		html += "<li>";
+			html += "<p>EL CARRITO ESTA VACIO</p>";
+		html += "</li>";
 	}
 	else{
-		html += "<button id='vaciarCarrito' onclick='vaciarCarrito()'>VaciarCarrito</button>";
 		for(var i = 0; i < carrito.length; i++){
 			
 			var idProducto = carrito[i].idProducto;
 			var nombre = carrito[i].nombreProducto;
 			var precio = carrito[i].precio;
 			var cantidad = carrito[i].cantidad;
+			total += precio*cantidad;
 			
-			html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
-			html += "<p>Precio: "+ precio*cantidad +" €</p>";
-			html += "<p>Cantidad: "+ cantidad +"</p>";
+			html += "<li>";
+				html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
+				html += "<p>Precio: "+ precio*cantidad +" €</p>";
+				html += "<p>Cantidad: "+ cantidad +"</p>";
+			html += "</li>";
 			
 		}
 
 	}
+	
+	html += "</ul>";
+	html += "<h2 id='total'>TOTAL: "+ total +" €</h2>";
 	
 	$("#carrito").html(html);
 	
@@ -72,16 +84,17 @@ function vaciarCarrito(){
 	pintarCarrito();
 }
 
-function finalizarCompra(purl){
+function finalizarCompra(){
 	
 	var tag = "insertarPedido";
 	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
+	var url = "";
 	
 	if(carrito.length > 0){
 		$.ajax({
 			type: "POST",
 			datatype: "json",
-			url: purl,
+			url: url,
 			data: {"tag": tag, "carrito": carrito},
 			success: function(){
 				if(datos != false){
@@ -97,7 +110,7 @@ function finalizarCompra(purl){
 				}
 			},
 			error: function(){
-				alert("Error al finalizar la compra");
+				alert("Error de ajax");
 			}
 		});
 	}
