@@ -35,11 +35,13 @@ function pintarCarrito(){
 			
 			html += "<li>";
 				html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
-				html += "<p>Precio: "+ precio*cantidad +" €</p>";
-				html += "<p>x"+ cantidad +"</p>";
-				html += "<button class='btn' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
-				html += "<button class='btn' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
-				html += "<button class='btn' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
+				html += "<p>"+ precio*cantidad +".00 €</p>";
+				html += "<div>";
+					html += "<button class='btn' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
+					html += "<p>x"+ cantidad +"</p>";
+					html += "<button class='btn' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
+					html += "<button class='btn' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
+				html += "</div>";
 			html += "</li>";
 			
 		}

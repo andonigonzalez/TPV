@@ -61,11 +61,11 @@ $(function(){
 	
 	if($("section").attr("id") == "inicio"){
 		cabecera();
+		recuperarProductos();
 	}
 	else if($("section").attr("id") == "productos"){
 		
 		cabecera();
-		recuperarProductos();
 		menuAbajo();
 		mostrarProductos();
 		menuArriba();
