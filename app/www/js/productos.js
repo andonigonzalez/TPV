@@ -5,7 +5,7 @@ function recuperarProductos(){
 	$.ajax({
 		type: "POST",
 		datatype: "json",
-		url : "http://andonigonzalez.ikasle.aeg.es/php/controlador.php",
+		url: "http://andonigonzalez.ikasle.aeg.es/php/controlador.php",
 		data: {'tag':tag},
 		success: function(data){
 			if(data != false){
