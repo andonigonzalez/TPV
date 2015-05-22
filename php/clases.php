@@ -7,9 +7,9 @@ class Conexion{
 	function __construct(){
 
 		$host = "localhost";
-		$user = "milart";
-		$pass = "12345";
-		$bd = "milart";
+		$user = "comanda";
+		$pass = "12345678";
+		$bd = "comanda";
 
 		$conect = new mysqli($host, $user, $pass, $bd);
 
@@ -29,7 +29,7 @@ class Conexion{
 
 }
 
-class Productos{
+class Producto{
 
 	private $sql;
 
@@ -50,8 +50,7 @@ class Productos{
 				$aux = array(
 					"idProducto"  => $fila->id,
 					"nombre" => $fila->nombre,
-					"descripcion" => $fila->descripcion,
-					"img" => $fila->img,
+					"precio" => $fila->precio,
 				);
 				
 				array_push($datos, $aux);
@@ -82,6 +81,44 @@ class Productos{
 		
 	}
 
+}
+
+class Mesa{
+	
+	private $sql;
+	
+	function __construct(){
+
+		$obj = new Conexion();
+		$this->sql = $obj->getConexion();
+
+	}
+	
+	public function getMesas(){
+		
+		$consulta = $this->sql->query("select * from mesas");
+
+		if($consulta->num_rows > 0){
+			$datos = array();
+			while($fila = $consulta->fetch_object()){
+				$aux = array(
+					"idMesa"  => $fila->id,
+					"numMesa" => $fila->num_mesa,
+				);
+				
+				array_push($datos, $aux);
+			}
+		}
+		else{
+			$datos = false;
+		}
+
+		return $datos;
+		
+		$this->sql->close();
+		
+	}
+	
 }
 
 ?>

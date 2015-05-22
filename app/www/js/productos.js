@@ -8,9 +8,12 @@ function recuperarProductos(){
 		url: "http://andonigonzalez.ikasle.aeg.es/php/controlador.php",
 		data: {'tag':tag},
 		success: function(data){
-			if(data != false){
+			if(data != false && data != null){
 				var datos = JSON.parse(data);
 				localStorage.setItem("productos", JSON.stringify(datos));
+			}
+			else{
+				alert("Error al recuperar productos");
 			}
 		},
 		error: function(){
@@ -30,14 +33,12 @@ function mostrarProductos(){
 		
 		var idProducto = productos[i].idProducto;
 		var nombre = productos[i].nombre;
-		var descripcion = productos[i].descripcion;
-		var img = productos[i].img;
+		var precio = productos[i].precio;
 		
 		html += "<article>";
-			html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
-			html += "<img src='http://andonigonzalez.ikasle.aeg.es/milart/img/"+ img +"' alt='"+ nombre +"'>";
-			html += "<p>Precio: "+ (2*i+3) +" €</p>";
-			html += "<button class='btn botonCompra' data-id='"+ idProducto +"' data-nombre='"+ nombre +"' data-precio='"+ (2*i+3) +"'>Pedir</button>";
+			html += "<h2>"+ nombre +"</h2>";
+			html += "<p>Precio: "+ precio +" €</p>";
+			html += "<button class='btnOscuro botonCompra' data-id='"+ idProducto +"' data-nombre='"+ nombre +"' data-precio='"+ precio +"'>Pedir</button>";
 		html += "</article>";
 		
 	}

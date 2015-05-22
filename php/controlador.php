@@ -12,13 +12,21 @@ if(isset($_POST["tag"]) || $_POST["tag"] != ""){
 	switch($tag){
 		
 		case "recuperarProductos":
-			$obj = new Productos();
+			$obj = new Producto();
 			$datos = $obj->getProductos();
 
 			echo json_encode($datos);
 			
 			break;
-		
+			
+		case "recuperarMesas":
+			$obj = new Mesa();
+			$datos = $obj->getMesas();
+			
+			echo json_encode($datos);
+			
+			break;
+			
 	}
 	
 }

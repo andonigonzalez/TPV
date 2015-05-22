@@ -1,9 +1,10 @@
 function cabecera(){
 		
+	var mesa = JSON.parse(localStorage.getItem("mesa"));
 	var html = "";
 	
 	html += "<header>";
-		html += "<h1>TPV</h1>";
+		html += "<h1>TPV - mesa: </h1>";
 		html += "<img id='burger' src='img/hamburger.png' alt='icono menu'>";
 		html += "<div class='cierre'></div>";
 	html += "</header>";
@@ -13,7 +14,7 @@ function cabecera(){
 	
 }
 
-function menuArriba(){
+function subcategorias(){
 	
 	var html = "";
 	
@@ -54,31 +55,85 @@ function esconderCarrito(){
 	$("#carrito").fadeOut();
 }
 
+function recuperarMesas(){
+	
+	var tag = "recuperarMesas";
+	
+	$.ajax({
+		type: "POST",
+		datatype: "json",
+		url: "http://andonigonzalez.ikasle.aeg.es/php/controlador.php",
+		data: {'tag':tag},
+		success: function(data){
+			if(data != false && data != null){
+				var datos = JSON.parse(data);
+				localStorage.setItem("listadoMesas", JSON.stringify(datos));
+			}
+			else{
+				alert("Error al recuperar mesas");
+			}
+		},
+		error: function(){
+			alert("Error de ajax");
+		}
+	});
+	
+}
+
+function mostrarMesas(){
+	
+	var mesas = JSON.parse(localStorage.getItem("listadoMesas"));
+	var html = "";
+	
+	for(var i = 0; i < mesas.length; i++){
+		html += "<p>"+ mesas.numMesa +"</p>";
+	}
+	
+}
+
 $(function(){
 	
 	FastClick.attach(document.body);
-
 	
-	if($("section").attr("id") == "inicio"){
-		cabecera();
-		recuperarProductos();
-	}
-	else if($("section").attr("id") == "productos"){
+	/*INICIO DE PAGINAS*/
+	switch($("section").attr("id")){
 		
-		cabecera();
-		menuAbajo();
-		mostrarProductos();
-		menuArriba();
-		
-		if(sessionStorage.getItem("carrito") == null){
-			crearCarrito();
-		}
-		else{
-			pintarCarrito();
-		}
-		
+		case "inicio":
+			cabecera();
+			recuperarProductos();
+			
+			$("#configEntrar").click(function(){
+				if($("#configNombre").val() == "andoni" && $("#configPass").val() == "123"){
+					window.location = "configuracion.html";
+				}
+			});
+			
+			break;
+			
+		case "productos":
+			cabecera();
+			menuAbajo();
+			mostrarProductos();
+			subcategorias();
+			
+			if(sessionStorage.getItem("carrito") == null){
+				crearCarrito();
+			}
+			else{
+				pintarCarrito();
+			}
+			
+			break;
+			
+		case "configuracion":
+			cabecera();
+			recuperarMesas();
+			
+			break;
+			
 	}
 
+	/*CARRITO*/
 	$(".botonCompra").click(function(){
 
 		var idProducto = $(this).attr("data-id");
@@ -93,6 +148,7 @@ $(function(){
 
 	});
 
+	/*EFECTOS*/
 	$("#burger").click(function(){
 		$("#carrito").hide();
 		$("#menuArriba").slideToggle();
@@ -101,6 +157,10 @@ $(function(){
 	$("#btnCarrito").click(function(){
 		$("#menuArriba").hide();
 		$("#carrito").fadeToggle();
+	});
+	
+	$("#btnConfig").click(function(){
+		$("#login").fadeToggle();
 	});
 
 });

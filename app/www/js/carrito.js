@@ -15,8 +15,8 @@ function pintarCarrito(){
 	var total = 0;
 	var html = "";
 	
-	html += "<button id='vaciarCarrito' class='btn' onclick='vaciarCarrito()'>VaciarCarrito</button>";
-	html += "<button class='btn' onclick='esconderCarrito()'>Seguir Comprando</button>";
+	html += "<button id='vaciarCarrito' class='btnClaro' onclick='vaciarCarrito()'>VaciarCarrito</button>";
+	html += "<button class='btnClaro' onclick='esconderCarrito()'>Seguir Comprando</button>";
 	html += "<ul>";
 	
 	if(carrito.length == 0){
@@ -34,13 +34,13 @@ function pintarCarrito(){
 			total += precio*cantidad;
 			
 			html += "<li>";
-				html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
-				html += "<p>"+ precio*cantidad +".00 €</p>";
+				html += "<h2>"+ nombre +"</h2>";
+				html += "<p>"+ (precio*cantidad).toFixed(2) +" €</p>";
 				html += "<div>";
-					html += "<button class='btn' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
 					html += "<p>x"+ cantidad +"</p>";
-					html += "<button class='btn' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
-					html += "<button class='btn' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
 				html += "</div>";
 			html += "</li>";
 			
@@ -49,7 +49,7 @@ function pintarCarrito(){
 	}
 	
 	html += "</ul>";
-	html += "<h2 id='total'>TOTAL: "+ total +" €</h2>";
+	html += "<h2 id='total'>TOTAL: "+ total.toFixed(2) +" €</h2>";
 	
 	$("#carrito").html(html);
 	
