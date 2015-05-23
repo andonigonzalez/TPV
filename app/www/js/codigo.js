@@ -86,8 +86,13 @@ function mostrarMesas(){
 	var html = "";
 	
 	for(var i = 0; i < mesas.length; i++){
-		html += "<p>"+ mesas.numMesa +"</p>";
+		var idMesa = mesas[i].idMesa;
+		var numMesa = mesas[i].numMesa;
+
+		html += "<p>"+ numMesa +"</p>";
 	}
+
+	$("#configuracion").append(html);
 	
 }
 
@@ -101,6 +106,7 @@ $(function(){
 		case "inicio":
 			cabecera();
 			recuperarProductos();
+			recuperarMesas();
 			
 			$("#configEntrar").click(function(){
 				if($("#configNombre").val() == "andoni" && $("#configPass").val() == "123"){
@@ -127,7 +133,7 @@ $(function(){
 			
 		case "configuracion":
 			cabecera();
-			recuperarMesas();
+			mostrarMesas();
 			
 			break;
 			
