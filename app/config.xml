@@ -9,6 +9,7 @@
     </author>
     <content src="index.html" />
 	<preference name="orientation" value="portrait" />
+	<preference name="fullscreen" value="true" />
     <icon src="icon.png" />
     <access origin="http://andonigonzalez.ikasle.aeg.es/*" />
     <plugin name="cordova-plugin-whitelist" version="1" />

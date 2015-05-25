@@ -1,3 +1,19 @@
+/*BACKBUTTON*/
+document.addEventListener("backbutton", botonAtras, false);
+
+function botonAtras(){
+	if($("section").attr("id") == "inicio"){
+		alert("No puedes salir de la app");
+	}
+	else if($("#carrito").css("display") == "block"){
+		$("#carrito").fadeOut();
+	}
+	else{
+		window.history.back();
+	}
+}
+
+/*MENUS*/
 function cabecera(){
 		
 	var mesa = JSON.parse(localStorage.getItem("mesa"));
@@ -22,7 +38,7 @@ function subcategorias(){
 	html += "<div id='menuArriba'>";
 		html += "<ul>";
 			for(var i = 0; i < sc.length; i++){
-						html += "<li>"+ sc[i].nombre +"</li>";
+				html += "<li><a>"+ sc[i].nombre +"</a></li>";
 			}
 		html += "</ul>";
 	html += "</div>";
@@ -37,9 +53,9 @@ function menuAbajo(){
 	
 	html += "<nav>";
 		html += "<ul>";
-			html += "<li data-cat='vendidos'><a>Más Vendidos</a></li>";
-			html += "<li data-cat='bebida'><a>Bebida</a></li>";
-			html += "<li data-cat='comida'><a>Comida</a></li>";
+			html += "<li><a>Más Vendidos</a></li>";
+			html += "<li><a href='bebida.html'>Bebida</a></li>";
+			html += "<li><a href='comida.html'>Comida</a></li>";
 			html += "<li><a id='btnCarrito'>Carrito</a></li>";
 		html += "</ul>";
 	html += "</nav>";
@@ -48,10 +64,7 @@ function menuAbajo(){
 	
 }
 
-function esconderCarrito(){
-	$("#carrito").fadeOut();
-}
-
+/*MESAS*/
 function recuperarMesas(){
 	
 	var tag = "recuperarMesas";
@@ -93,6 +106,11 @@ function mostrarMesas(){
 	
 }
 
+/*CARRITO*/
+function esconderCarrito(){
+	$("#carrito").fadeOut();
+}
+
 $(function(){
 	
 	FastClick.attach(document.body);
@@ -114,17 +132,24 @@ $(function(){
 			
 			break;
 			
-		case "productos":
+		case "configuracion":
+			cabecera();
+			mostrarMesas();
+			
+			$("#configuracion p").click(function(){
+				var mesa = $(this).attr("data-numero");
+				localStorage.setItem("mesa", mesa);
+				alert("Mesa cambiada a "+ mesa);
+			});
+			
+			break;
+			
+		case "comida":
 			cabecera();
 			subcategorias();
 			menuAbajo();
 			var cat = "comida";
 			mostrarProductos(cat);
-			
-			$("nav ul li").click(function(){
-				cat = $(this).attr("data-cat");
-				mostrarProductos(cat);
-			});
 			
 			if(sessionStorage.getItem("carrito") == null){
 				crearCarrito();
@@ -135,22 +160,26 @@ $(function(){
 			
 			break;
 			
-		case "configuracion":
+		case "bebida":
 			cabecera();
-			mostrarMesas();
+			subcategorias();
+			menuAbajo();
+			var cat = "bebida";
+			mostrarProductos(cat);
 			
-			$("#configuracion p").click(function(){
-				var mesa = $(this).attr("data-numero");
-				localStorage.setItem("mesa", mesa);
-			});
+			if(sessionStorage.getItem("carrito") == null){
+				crearCarrito();
+			}
+			else{
+				pintarCarrito();
+			}
 			
 			break;
 			
 	}
-
-	/*CARRITO*/
+	
 	$(".botonCompra").click(function(){
-
+		
 		var idProducto = $(this).attr("data-id");
 		var nombre = $(this).attr("data-nombre");
 		var precio = $(this).attr("data-precio");

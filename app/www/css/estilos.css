@@ -93,6 +93,10 @@ nav ul li{
 	display: inline-block;
 	padding: 4% 3.3%;
 }
+nav ul li a{
+	color: #fafafa;
+	text-decoration: none;
+}
 
 
 /*CARRITO*/
@@ -183,17 +187,17 @@ nav ul li{
 
 /*PRODUCTOS*/
 
-#productos article{
+.productos article{
 	margin: 7%% 0;
 }
-#productos article img{
+.productos article img{
 	width: 100%;
 	margin: 1.5% 0;
 }
-#productos article p{
+.productos article p{
 	display: inline-block;
 }
-#productos article .btnOscuro{
+.productos article .btnOscuro{
 	float: right;
 }
 

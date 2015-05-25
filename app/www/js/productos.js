@@ -71,6 +71,6 @@ function mostrarProductos(c){
 		
 	}
 	
-	$("#productos").html(html);
+	$(".productos").html(html);
 	
 }
