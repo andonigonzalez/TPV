@@ -4,7 +4,7 @@ function cabecera(){
 	var html = "";
 	
 	html += "<header>";
-		html += "<h1>TPV - mesa: </h1>";
+		html += "<h1>TPV - mesa: "+ mesa +"</h1>";
 		html += "<img id='burger' src='img/hamburger.png' alt='icono menu'>";
 		html += "<div class='cierre'></div>";
 	html += "</header>";
@@ -16,17 +16,14 @@ function cabecera(){
 
 function subcategorias(){
 	
+	var sc = JSON.parse(localStorage.getItem("subcategorias"));
 	var html = "";
 	
 	html += "<div id='menuArriba'>";
 		html += "<ul>";
-			html += "<li>Cervezas</li>";
-			html += "<li>Vinos</li>";
-			html += "<li>Raciones</li>";
-			html += "<li>Tostas</li>";
-			html += "<li>Bocadillos</li>";
-			html += "<li>Hamburguesas</li>";
-			html += "<li>Postres</li>";
+			for(var i = 0; i < sc.length; i++){
+						html += "<li>"+ sc[i].nombre +"</li>";
+			}
 		html += "</ul>";
 	html += "</div>";
 	
@@ -40,9 +37,9 @@ function menuAbajo(){
 	
 	html += "<nav>";
 		html += "<ul>";
-			html += "<li><a>Más Vendidos</a></li>";
-			html += "<li><a>Bebida</a></li>";
-			html += "<li><a>Comida</a></li>";
+			html += "<li data-cat='vendidos'><a>Más Vendidos</a></li>";
+			html += "<li data-cat='bebida'><a>Bebida</a></li>";
+			html += "<li data-cat='comida'><a>Comida</a></li>";
 			html += "<li><a id='btnCarrito'>Carrito</a></li>";
 		html += "</ul>";
 	html += "</nav>";
@@ -89,7 +86,7 @@ function mostrarMesas(){
 		var idMesa = mesas[i].idMesa;
 		var numMesa = mesas[i].numMesa;
 
-		html += "<p>"+ numMesa +"</p>";
+		html += "<p data-numero='"+ numMesa +"'>"+ numMesa +"</p>";
 	}
 
 	$("#configuracion").append(html);
@@ -107,6 +104,7 @@ $(function(){
 			cabecera();
 			recuperarProductos();
 			recuperarMesas();
+			recuperarSubcategorias();
 			
 			$("#configEntrar").click(function(){
 				if($("#configNombre").val() == "andoni" && $("#configPass").val() == "123"){
@@ -118,9 +116,15 @@ $(function(){
 			
 		case "productos":
 			cabecera();
-			menuAbajo();
-			mostrarProductos();
 			subcategorias();
+			menuAbajo();
+			var cat = "comida";
+			mostrarProductos(cat);
+			
+			$("nav ul li").click(function(){
+				cat = $(this).attr("data-cat");
+				mostrarProductos(cat);
+			});
 			
 			if(sessionStorage.getItem("carrito") == null){
 				crearCarrito();
@@ -134,6 +138,11 @@ $(function(){
 		case "configuracion":
 			cabecera();
 			mostrarMesas();
+			
+			$("#configuracion p").click(function(){
+				var mesa = $(this).attr("data-numero");
+				localStorage.setItem("mesa", mesa);
+			});
 			
 			break;
 			

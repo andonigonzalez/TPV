@@ -29,7 +29,7 @@ class Conexion{
 
 }
 
-class Producto{
+class App{
 
 	private $sql;
 
@@ -42,7 +42,13 @@ class Producto{
 
 	public function getProductos(){
 
-		$consulta = $this->sql->query("select * from productos");
+		$consulta = $this->sql->query("
+			select p.*, c.nombre as categoria, sc.nombre as subcategoria
+			from productos p
+			left join subcategorias sc on sc.id = p.id_subcategoria
+			inner join categorias c on c.id = sc.id_categoria
+			order by p.nombre
+		");
 
 		if($consulta->num_rows > 0){
 			$datos = array();
@@ -51,6 +57,8 @@ class Producto{
 					"idProducto"  => $fila->id,
 					"nombre" => $fila->nombre,
 					"precio" => $fila->precio,
+					"categoria" => $fila->categoria,
+					"subcategoria" => $fila->subcategoria,
 				);
 				
 				array_push($datos, $aux);
@@ -63,34 +71,6 @@ class Producto{
 		return $datos;
 		
 		$this->sql->close();
-
-	}
-	
-	public function getUnProducto($id){
-		
-		$consulta = $this->sql->query("select * from productos where id = '$id'");
-		
-		if($consulta->num_rows == 1){
-			return $consulta;
-		}
-		else{
-			return false;	
-		}
-		
-		$this->sql->close();
-		
-	}
-
-}
-
-class Mesa{
-	
-	private $sql;
-	
-	function __construct(){
-
-		$obj = new Conexion();
-		$this->sql = $obj->getConexion();
 
 	}
 	
@@ -119,6 +99,33 @@ class Mesa{
 		
 	}
 	
+	public function getSubcategorias(){
+		
+		$consulta = $this->sql->query("select * from subcategorias");
+
+		if($consulta->num_rows > 0){
+			$datos = array();
+			while($fila = $consulta->fetch_object()){
+				$aux = array(
+					"idSc"  => $fila->id,
+					"nombre" => $fila->nombre,
+					"idCat" => $fila->id_categoria,
+					"modificadores" => $fila->id_modificadores,
+				);
+				
+				array_push($datos, $aux);
+			}
+		}
+		else{
+			$datos = false;
+		}
+
+		return $datos;
+		
+		$this->sql->close();
+		
+	}
+
 }
 
 ?>

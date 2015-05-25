@@ -196,3 +196,15 @@ nav ul li{
 #productos article .btnOscuro{
 	float: right;
 }
+
+/*CONFIGURACION*/
+
+#configuracion p{
+	background-color: grey;
+	display: inline-block;
+	width: 20%;
+	padding: 3% 0;
+	margin: 2%;
+	text-align: center;
+	border-radius: 5px;
+}

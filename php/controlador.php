@@ -8,11 +8,11 @@ include("clases.php");
 if(isset($_POST["tag"]) || $_POST["tag"] != ""){
 	
 	$tag = $_POST["tag"];
+	$obj = new App();
 	
 	switch($tag){
 		
 		case "recuperarProductos":
-			$obj = new Producto();
 			$datos = $obj->getProductos();
 
 			echo json_encode($datos);
@@ -20,8 +20,14 @@ if(isset($_POST["tag"]) || $_POST["tag"] != ""){
 			break;
 			
 		case "recuperarMesas":
-			$obj = new Mesa();
 			$datos = $obj->getMesas();
+
+			echo json_encode($datos);
+			
+			break;
+			
+		case "subcategorias":
+			$datos = $obj->getSubcategorias();
 			
 			echo json_encode($datos);
 			
