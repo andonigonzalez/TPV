@@ -47,7 +47,8 @@ header{
 }
 header h1{
 	display: inline-block;
-	font-size: 2.4em;
+	font-size: 1.5em;
+	margin-top: 2%;
 }
 #burger{
 	width: 20%;
@@ -211,4 +212,22 @@ nav ul li a{
 	margin: 2%;
 	text-align: center;
 	border-radius: 5px;
+}
+
+/*SUBCATEGORIAS*/
+
+.subCat div{
+	width: 46%;
+	display: inline-block;
+	margin: 2%;
+	background-color: #ddd;
+	color: #212121;
+	border-radius: 5px;
+	text-align: center;
+}
+.subCat div a{
+	color: #212121;
+	text-decoration: none;
+	display: block;
+	padding: 15% 0;
 }

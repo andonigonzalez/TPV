@@ -101,7 +101,12 @@ class App{
 	
 	public function getSubcategorias(){
 		
-		$consulta = $this->sql->query("select * from subcategorias");
+		$consulta = $this->sql->query("
+			select sc.*, c.nombre as categoria
+			from subcategorias sc
+			left join categorias c on c.id = sc.id_categoria
+			order by sc.id
+		");
 
 		if($consulta->num_rows > 0){
 			$datos = array();

@@ -48,7 +48,7 @@ function recuperarSubcategorias(){
 	
 }
 
-function mostrarProductos(c){
+function mostrarProductos(sc){
 		
 	var productos = JSON.parse(localStorage.getItem("productos"));
 	
@@ -60,8 +60,9 @@ function mostrarProductos(c){
 		var nombre = productos[i].nombre;
 		var precio = productos[i].precio;
 		var categoria = productos[i].categoria;
+		var subcategoria = productos[i].subcategoria;
 		
-		if(categoria == c){
+		if(subcategoria == sc){
 			html += "<article>";
 				html += "<h2>"+ nombre +"</h2>";
 				html += "<p>Precio: "+ precio +" €</p>";
@@ -72,5 +73,28 @@ function mostrarProductos(c){
 	}
 	
 	$(".productos").html(html);
+	
+}
+
+function mostrarSubcategorias(c){
+		
+	var subcategorias = JSON.parse(localStorage.getItem("subcategorias"));
+	
+	var html = "";
+	
+	for(var i = 0; i < subcategorias.length; i++){
+		
+		var nombre = subcategorias[i].nombre;
+		var categoria = subcategorias[i].categoria;
+		
+		if(categoria == c){
+			html += "<div>";
+				html += "<h2><a href='productos.html?"+ nombre +"'>"+ nombre +"</a></h2>";
+			html += "</div>";
+		}
+		
+	}
+	
+	$(".subCat").html(html);
 	
 }
