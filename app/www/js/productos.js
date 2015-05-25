@@ -89,7 +89,7 @@ function mostrarSubcategorias(c){
 		
 		if(categoria == c){
 			html += "<div>";
-				html += "<h2><a href='productos.html?"+ nombre +"'>"+ nombre +"</a></h2>";
+				html += "<h2><a href='productos.html?sc="+ nombre +"'>"+ nombre +"</a></h2>";
 			html += "</div>";
 		}
 		

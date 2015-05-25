@@ -20,7 +20,7 @@ function cabecera(titulo){
 	var html = "";
 	
 	html += "<header>";
-		html += "<h1>"+ titulo +" - mesa: "+ mesa +"</h1>";
+		html += "<h1>"+ mesa +" | "+ titulo +"</h1>";
 		html += "<img id='burger' src='img/hamburger.png' alt='icono menu'>";
 		html += "<div class='cierre'></div>";
 	html += "</header>";
@@ -132,23 +132,6 @@ function getGET(){
 	}
 }
 
-/*UTILIZACION DE LA FUNCION getGET*/
-window.onload = function(){
-	// Cogemos los valores pasados por get
-	var valores=getGET();
-	if(valores)
-	{
-		// hacemos un bucle para pasar por cada indice del array de valores
-		for(var index in valores)
-		{
-			document.write("<br>clave: "+index+" - valor: "+valores[index]);
-		}
-	}else{
-		// no se ha recibido ningun parametro por GET
-		document.write("<br>No se ha recibido ningún parámetro");
-	}
-}
-
 $(function(){
 	
 	FastClick.attach(document.body);
@@ -235,7 +218,20 @@ $(function(){
 			
 			break;
 			
-		
+		case "productos":
+			var parametros = getGET();
+
+			for(var index in parametros){
+				var sc = parametros[index];
+			}
+
+			titulo = sc;
+			cabecera(titulo);
+			subcategorias();
+			menuAbajo();
+			mostrarProductos(sc);
+
+			break;
 			
 	}
 	

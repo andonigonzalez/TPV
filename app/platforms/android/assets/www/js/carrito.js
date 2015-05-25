@@ -12,27 +12,44 @@ function pintarCarrito(){
 	
 	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
 	
+	var total = 0;
 	var html = "";
 	
+	html += "<button id='vaciarCarrito' class='btnClaro' onclick='vaciarCarrito()'>VaciarCarrito</button>";
+	html += "<button class='btnClaro' onclick='esconderCarrito()'>Seguir Comprando</button>";
+	html += "<ul>";
+	
 	if(carrito.length == 0){
-		html += "<p>EL CARRITO ESTA VACIO</p>";
+		html += "<li>";
+			html += "<p>EL CARRITO ESTA VACIO</p>";
+		html += "</li>";
 	}
 	else{
-		html += "<button id='vaciarCarrito' onclick='vaciarCarrito()'>VaciarCarrito</button>";
 		for(var i = 0; i < carrito.length; i++){
 			
 			var idProducto = carrito[i].idProducto;
 			var nombre = carrito[i].nombreProducto;
 			var precio = carrito[i].precio;
 			var cantidad = carrito[i].cantidad;
+			total += precio*cantidad;
 			
-			html += "<h2>"+ idProducto + ". " + nombre +"</h2>";
-			html += "<p>Precio: "+ precio*cantidad +" €</p>";
-			html += "<p>Cantidad: "+ cantidad +"</p>";
+			html += "<li>";
+				html += "<h2>"+ nombre +"</h2>";
+				html += "<p>"+ (precio*cantidad).toFixed(2) +" €</p>";
+				html += "<div>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 0 +", "+ [i] +")'>-</button>";
+					html += "<p>x"+ cantidad +"</p>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 1 +", "+ [i] +")'>+</button>";
+					html += "<button class='btnClaro' onclick='modificarCarrito("+ 2 +", "+ [i] +")'>X</button>";
+				html += "</div>";
+			html += "</li>";
 			
 		}
 
 	}
+	
+	html += "</ul>";
+	html += "<h2 id='total'>TOTAL: "+ total.toFixed(2) +" €</h2>";
 	
 	$("#carrito").html(html);
 	
@@ -72,16 +89,46 @@ function vaciarCarrito(){
 	pintarCarrito();
 }
 
-function finalizarCompra(purl){
+function modificarCarrito(paccion, pposicion){
+	
+	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
+	var cantidad = carrito[pposicion].cantidad;
+	
+	switch(paccion){
+		
+		case 0:
+			carrito[pposicion].cantidad = cantidad - 1;
+			if(carrito[pposicion].cantidad == 0){
+				carrito.splice(pposicion, 1);
+			}
+			break;
+		
+		case 1:
+			carrito[pposicion].cantidad = cantidad + 1;
+			break;
+			
+		case 2:
+			carrito.splice(pposicion, 1);
+			break;
+		
+	}
+	
+	sessionStorage.setItem("carrito", JSON.stringify(carrito));
+	pintarCarrito();
+	
+}
+
+function finalizarCompra(){
 	
 	var tag = "insertarPedido";
 	var carrito = JSON.parse(sessionStorage.getItem("carrito"));
+	var url = "";
 	
 	if(carrito.length > 0){
 		$.ajax({
 			type: "POST",
 			datatype: "json",
-			url: purl,
+			url: url,
 			data: {"tag": tag, "carrito": carrito},
 			success: function(){
 				if(datos != false){
@@ -97,7 +144,7 @@ function finalizarCompra(purl){
 				}
 			},
 			error: function(){
-				alert("Error al finalizar la compra");
+				alert("Error de ajax");
 			}
 		});
 	}

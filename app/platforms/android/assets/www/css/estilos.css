@@ -3,6 +3,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-size: 16px;
+	font-family: "robotoregular";
 }
 body{
 	margin-top: 15%;
@@ -11,7 +12,15 @@ body{
 .cierre{
 	clear: both;
 }
-.btn{
+.btnClaro{
+	border: none;
+	color: #212121;
+	background-color: #fafafa;
+	padding: 2%;
+	border-radius: 5px;
+	text-decoration: none;
+}
+.btnOscuro{
 	border: none;
 	color: #fafafa;
 	background-color: #212121;
@@ -38,7 +47,8 @@ header{
 }
 header h1{
 	display: inline-block;
-	font-size: 2.4em;
+	font-size: 1.5em;
+	margin-top: 2%;
 }
 #burger{
 	width: 20%;
@@ -84,12 +94,18 @@ nav ul li{
 	display: inline-block;
 	padding: 4% 3.3%;
 }
+nav ul li a{
+	color: #fafafa;
+	text-decoration: none;
+}
 
 
 /*CARRITO*/
 
 #carrito{
+	display: none;
 	width: 100%;
+	height: 86%;
 	background-color: #212121;
 	position: fixed;
 	top: 7.5%;
@@ -97,6 +113,47 @@ nav ul li{
 	z-index: 100;
 	color: #fafafa;
 	padding: 4%;
+}
+#carrito .btnClaro{
+	background-color: #fafafa;
+	color: #212121;
+}
+#carrito > .btnClaro{
+	width: 48%;
+	margin: 0 .5%;
+}
+#carrito ul{
+	margin: 5% 0;
+	list-style-type: none;
+	max-height: 60%;
+	overflow-y: auto;
+}
+#carrito ul li{
+	border-bottom: 1px solid #eee;
+	padding: 3% 0;
+}
+#carrito ul li div{
+	width: 70%;
+	text-align: right;
+	float: right;
+}
+#carrito ul li p{
+	display: inline-block;
+	margin: 1% 2%;
+}
+#carrito ul li div .btnClaro{
+	margin: 0 4%;
+	padding: 1.5% 5% 1% 5%;
+	color: #fafafa;
+	background-color: #212121;
+	border: 1px solid #fafafa;
+}
+#carrito ul li div .btnClaro:last-child{
+	margin-left: 18%;
+}
+#carrito #total{
+	font-size: 1.3em;
+	text-align: center;
 }
 
 
@@ -112,17 +169,65 @@ nav ul li{
 	padding: 5% 0;
 	margin-top: 90%;
 }
+#login{
+	display: none;
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	width: 60%;
+	background-color: #212121;
+	color: #fafafa;
+	padding: 2%;
+	border-radius: 5px;
+}
+#login .btnClaro{
+	background-color: #fafafa;
+	color: #212121;
+	margin: 5%;
+}
 
 /*PRODUCTOS*/
 
-#productos article img{
+.productos article{
+	margin: 7%% 0;
+}
+.productos article img{
 	width: 100%;
 	margin: 1.5% 0;
 }
-#productos article p{
+.productos article p{
 	display: inline-block;
 }
-#productos article .btn{
+.productos article .btnOscuro{
 	float: right;
-	display: inline-block
+}
+
+/*CONFIGURACION*/
+
+#configuracion p{
+	background-color: grey;
+	display: inline-block;
+	width: 20%;
+	padding: 3% 0;
+	margin: 2%;
+	text-align: center;
+	border-radius: 5px;
+}
+
+/*SUBCATEGORIAS*/
+
+.subCat div{
+	width: 46%;
+	display: inline-block;
+	margin: 2%;
+	background-color: #ddd;
+	color: #212121;
+	border-radius: 5px;
+	text-align: center;
+}
+.subCat div a{
+	color: #212121;
+	text-decoration: none;
+	display: block;
+	padding: 15% 0;
 }
