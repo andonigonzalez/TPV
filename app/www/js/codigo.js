@@ -19,14 +19,13 @@ function cabecera(titulo){
 	var mesa = JSON.parse(localStorage.getItem("mesa"));
 	var html = "";
 	
-	html += "<header>";
+	html += "<div>";
 		html += "<h1>"+ mesa +" | "+ titulo +"</h1>";
 		html += "<img id='burger' src='img/hamburger.png' alt='icono menu'>";
 		html += "<div class='cierre'></div>";
-	html += "</header>";
-	html += "<div id='carrito'></div>";
+	html += "</div>";
 	
-	$("body").prepend(html);
+	$("header").html(html);
 	
 }
 
@@ -38,7 +37,7 @@ function subcategorias(){
 	html += "<div id='menuArriba'>";
 		html += "<ul>";
 			for(var i = 0; i < sc.length; i++){
-				html += "<li><a>"+ sc[i].nombre +"</a></li>";
+				html += "<li><a href='productos.html?sc="+ sc[i].nombre +"'>"+ sc[i].nombre +"</a></li>";
 			}
 		html += "</ul>";
 	html += "</div>";
@@ -53,9 +52,9 @@ function menuAbajo(){
 	
 	html += "<nav>";
 		html += "<ul>";
-			html += "<li><a href='masVendidos.html'>Más Vendidos</a></li>";
-			html += "<li><a href='bebida.html'>Bebida</a></li>";
-			html += "<li><a href='comida.html'>Comida</a></li>";
+			html += "<li><a href='masVendidos.html'>+ Vendidos</a></li>";
+			html += "<li><a href='subcategorias.html?c=bebida'>Bebida</a></li>";
+			html += "<li><a href='subcategorias.html?c=comida'>Comida</a></li>";
 			html += "<li><a id='btnCarrito'>Carrito</a></li>";
 		html += "</ul>";
 	html += "</nav>";
@@ -111,23 +110,20 @@ function esconderCarrito(){
 	$("#carrito").fadeOut();
 }
 
+/*PARAMETROS URL*/
 function getGET(){
-	// capturamos la url
 	var loc = document.location.href;
-	// si existe el interrogante
-	if(loc.indexOf('?')>0)
-	{
-		// cogemos la parte de la url que hay despues del interrogante
+	
+	if(loc.indexOf('?')>0){
 		var getString = loc.split('?')[1];
-		// obtenemos un array con cada clave=valor
 		var GET = getString.split('&');
 		var get = {};
 
-		// recorremos todo el array de valores
 		for(var i = 0, l = GET.length; i < l; i++){
 			var tmp = GET[i].split('=');
 			get[tmp[0]] = unescape(decodeURI(tmp[1]));
 		}
+		
 		return get;
 	}
 }
@@ -162,42 +158,8 @@ $(function(){
 			$("#configuracion p").click(function(){
 				var mesa = $(this).attr("data-numero");
 				localStorage.setItem("mesa", mesa);
-				alert("Mesa cambiada a "+ mesa);
+				cabecera(titulo);
 			});
-			
-			break;
-			
-		case "comida":
-			titulo = "Comida";
-			cabecera(titulo);
-			subcategorias();
-			menuAbajo();
-			var cat = "comida";
-			mostrarSubcategorias(cat);
-			
-			if(sessionStorage.getItem("carrito") == null){
-				crearCarrito();
-			}
-			else{
-				pintarCarrito();
-			}
-			
-			break;
-			
-		case "bebida":
-			titulo = "Bebida";
-			cabecera(titulo);
-			subcategorias();
-			menuAbajo();
-			var cat = "bebida";
-			mostrarSubcategorias(cat);
-			
-			if(sessionStorage.getItem("carrito") == null){
-				crearCarrito();
-			}
-			else{
-				pintarCarrito();
-			}
 			
 			break;
 			
@@ -216,11 +178,42 @@ $(function(){
 				pintarCarrito();
 			}
 			
+			$("nav ul li").removeClass();
+			$("nav ul li:nth-child(1)").addClass("activo");
+			
+			break;
+			
+		case "subcategorias":
+			var parametros = getGET();
+			for(var index in parametros){
+				var c = parametros[index];
+			}
+			titulo = c;
+			cabecera(titulo);
+			subcategorias();
+			menuAbajo();
+			mostrarSubcategorias(c);
+			
+			if(sessionStorage.getItem("carrito") == null){
+				crearCarrito();
+			}
+			else{
+				pintarCarrito();
+			}
+			
+			if(titulo == "comida"){
+				$("nav ul li").removeClass();
+				$("nav ul li:nth-child(3)").addClass("activo");
+			}
+			else if(titulo == "bebida"){
+				$("nav ul li").removeClass();
+				$("nav ul li:nth-child(2)").addClass("activo");
+			}
+			
 			break;
 			
 		case "productos":
 			var parametros = getGET();
-
 			for(var index in parametros){
 				var sc = parametros[index];
 			}
@@ -230,6 +223,13 @@ $(function(){
 			subcategorias();
 			menuAbajo();
 			mostrarProductos(sc);
+			
+			if(sessionStorage.getItem("carrito") == null){
+				crearCarrito();
+			}
+			else{
+				pintarCarrito();
+			}
 
 			break;
 			

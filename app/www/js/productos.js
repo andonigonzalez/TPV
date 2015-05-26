@@ -64,15 +64,18 @@ function mostrarProductos(sc){
 		
 		if(subcategoria == sc){
 			html += "<article>";
-				html += "<h2>"+ nombre +"</h2>";
-				html += "<p>Precio: "+ precio +" €</p>";
+				html += "<div>";
+					html += "<h2>"+ nombre +"</h2>";
+					html += "<p>Precio: "+ precio +" €</p>";
+				html += "</div>";
 				html += "<button class='btnOscuro botonCompra' data-id='"+ idProducto +"' data-nombre='"+ nombre +"' data-precio='"+ precio +"'>Pedir</button>";
+				html += "<div class='cierre'></div>";
 			html += "</article>";
 		}
 		
 	}
 	
-	$(".productos").html(html);
+	$("#productos").html(html);
 	
 }
 
@@ -95,6 +98,6 @@ function mostrarSubcategorias(c){
 		
 	}
 	
-	$(".subCat").html(html);
+	$("#subcategorias").html(html);
 	
 }
