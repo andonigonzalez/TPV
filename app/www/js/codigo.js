@@ -19,6 +19,10 @@ function cabecera(titulo){
 	var mesa = JSON.parse(localStorage.getItem("mesa"));
 	var html = "";
 	
+	if(mesa == null){
+		mesa = "Sin mesa";
+	}
+	
 	html += "<div>";
 		html += "<h1>"+ mesa +" | "+ titulo +"</h1>";
 		html += "<img id='burger' src='img/hamburger.png' alt='icono menu'>";
@@ -147,6 +151,13 @@ $(function(){
 					window.location = "configuracion.html";
 				}
 			});
+			
+			if($("#login").css("display") == "block"){
+				$("#comenzarPedido").css("box-shadow", "none");
+			}
+			else{
+				$("#comenzarPedido").css("box-shadow", "0 0 15px black");
+			}
 			
 			break;
 			

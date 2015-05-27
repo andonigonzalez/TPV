@@ -174,22 +174,28 @@ nav ul li a{
 
 #comenzarPedido{
 	display: block;
-	width: 60%; 
+	width: 200px;
+	height: 200px;
 	margin: auto;
 	text-align: center;
-	padding: 5% 0;
-	margin-top: 90%;
+	padding: 0;
+	margin-top: 65%;
+	border-radius: 100px;
+	line-height: 200px;
+	box-shadow: 0 0 15px black;
+	font-size: 1.4em;
 }
 #login{
 	display: none;
 	position: absolute;
-	top: 20%;
+	top: 15%;
 	left: 15%;
 	width: 70%;
 	background-color: #212121;
 	color: #fafafa;
 	padding: 4%;
 	border-radius: 5px;
+	box-shadow: 0 0 15px black;
 }
 #login h2{
 	font-size: 1.2em;
